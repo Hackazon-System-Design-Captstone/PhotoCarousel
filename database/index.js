@@ -1,11 +1,11 @@
 const faker = require('faker');
 const mysql = require('mysql');
-console.log(process.env)
+
+// console.log(process.env);
 const connection = mysql.createConnection({
   // waitForConnections : true,
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.PASSWORD,
+  host: 'localhost',
+  user: 'root',
   database: 'slideShowData',
 });
 
@@ -18,8 +18,25 @@ connection.connect((err) => {
 });
 
 const getRelated = (id, callback) => {
-  const queryString = `select * from products where id in (select relatedItemId from similarProducts where productId= ?)`;
+  const queryString = 'select * from products where id in (select relatedItemId from similarProducts where productId= ?)';
   connection.query(queryString, [id], callback);
+};
+// Passed addRelated
+const addRelated = (data) => {
+  const queryString = `INSERT INTO products (productName, productDescription, color, price, imageURL, rating, reviewNumber, isPrime)
+  VALUES("${data.productName}", "${data.productDescription}", "${data.color}", "${data.price}", "${data.imageURL}", "${data.rating}", "${data.reviewNumber}", "${data.isPrime}")`;
+  connection.query(queryString);
+};
+// Passed deleteRelated
+const deleteRelated = (id) => {
+  const queryString = `DELETE FROM products WHERE id = ${id}`;
+  connection.query(queryString);
+};
+// Test updateRelated
+const updateRelated = (data) => {
+  const queryString = `UPDATE products SET productName = "${data.productName}", productDescription = "${data.productDescription}"
+  WHERE id="${data.id}"`;
+  connection.query(queryString);
 };
 
 // function picks a random image from S3
@@ -37,7 +54,7 @@ function getRandomRating() {
 }
 
 const DATA_NUMBER = 100;
-const createTable = function () {
+const createTable = () => {
   for (let i = 0; i < DATA_NUMBER; i += 1) {
     const randomName = faker.commerce.productName();
     const randomDescription = faker.lorem.sentences();
@@ -71,3 +88,6 @@ const getRelatedItems = () => {
 
 
 module.exports.getRelated = getRelated;
+module.exports.addRelated = addRelated;
+module.exports.deleteRelated = deleteRelated;
+module.exports.updateRelated = updateRelated;
