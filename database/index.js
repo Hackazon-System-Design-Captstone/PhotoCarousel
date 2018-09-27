@@ -32,7 +32,7 @@ const deleteRelated = (id) => {
   const queryString = `DELETE FROM products WHERE id = ${id}`;
   connection.query(queryString);
 };
-// Test updateRelated
+// Passed updateRelated
 const updateRelated = (data) => {
   const queryString = `UPDATE products SET productName = "${data.productName}", productDescription = "${data.productDescription}"
   WHERE id="${data.id}"`;

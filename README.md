@@ -26,7 +26,13 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 - Node 6.13.0
 - etc
 
-## Development
+## CRUD
+
+use endpoint '/products' for all requests
+GET request triggers getAllRelated items
+POST request with an object formatted using schema will trigger addRelated
+PUT request with an object with schema format will trigger updateRelated
+DELETE request with id number will trigger deleteRelateds
 
 ### Installing Dependencies
 
