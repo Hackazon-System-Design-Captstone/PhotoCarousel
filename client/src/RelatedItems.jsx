@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fetch from 'node-fetch';
-import PzSlider from './PzSlider.jsx';
+import PzSlider from './PzSlider';
 import styles from './main.css';
 
 class RelatedItems extends Component {
@@ -98,7 +98,7 @@ class RelatedItems extends Component {
           {(products.length - (products.length % 6)) / 6 + 1}
         </span>
         <div>
-          {products.length > 0 ? <PzSlider  prev={this.pageClickP.bind(this)} next={this.pageClickN.bind(this)} items={pageProducts} /> : 'Loading...'}
+          {products.length > 0 ? <PzSlider prev={this.pageClickP.bind(this)} next={this.pageClickN.bind(this)} items={pageProducts} /> : 'Loading...'}
         </div>
       </div>
     );

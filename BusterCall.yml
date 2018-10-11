@@ -1,0 +1,17 @@
+config:
+  target: 'http://localhost:1337'
+  phases:
+    - duration: 20
+      arrivalRate: 500
+scenarios:
+  - flow:
+    - get:
+        url: "/api/6999481"
+    - get:
+        url: "/api/7999482"
+    - get:
+        url: "/api/8999483"
+    - get:
+        url: "/api/8999484"
+    - get:
+        url: "/api/8999485"
